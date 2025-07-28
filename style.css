@@ -1,0 +1,273 @@
+/* ฟอนต์ Sarabun */
+body, button, select, input, label, p, h1, h2, h3, ul, li {
+  font-family: 'Sarabun', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #374151; /* สีเทาเข้มนุ่มตา */
+}
+
+/* พื้นหลังและ container */
+body {
+  background-color: #f7fafc; /* ฟ้าอ่อนอมขาว */
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+}
+
+/* Header หน้าแรก */
+.welcome-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 2.4rem;
+  color: #2563eb; /* น้ำเงินสดใส */
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #2563eb;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #2563eb;
+}
+
+/* Header หน้าอื่นๆ */
+.header-small {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.back-btn {
+  background-color: #60a5fa;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 1rem;
+  user-select: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.back-btn:hover {
+  background-color: #2563eb;
+}
+
+/* เนื้อหา */
+.intro-section p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #4b5563;
+}
+
+.guide-list {
+  list-style: disc inside;
+  font-size: 1rem;
+  margin: 0 auto 20px;
+  max-width: 480px;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+/* ปุ่ม */
+.btn, button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 260px;
+  user-select: none;
+}
+
+.btn:hover, button:hover {
+  background-color: #1e40af;
+}
+
+.btn-secondary, .btn.btn-secondary {
+  background-color: #93c5fd;
+  color: #1e40af;
+}
+
+.btn-secondary:hover {
+  background-color: #60a5fa;
+  color: white;
+}
+
+/* จัดกลุ่มปุ่มตรงกลาง */
+.btn-group-center {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* ฟอร์ม */
+label {
+  display: block;
+  font-weight: 600;
+  margin: 10px 0 6px 0;
+  color: #2563eb;
+}
+
+select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1.5px solid #cbd5e1;
+  font-size: 1.1rem;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+/* Output ของโจทย์ */
+.output-box {
+  margin-top: 20px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* โครงสร้างข้อสอบ */
+.question-block {
+  background-color: #eff6ff;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.question-block:hover {
+  background-color: #dbeafe;
+}
+
+.choices-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+.choices-list li {
+  margin-bottom: 10px;
+}
+
+.choices-list label {
+  cursor: pointer;
+  font-size: 1rem;
+  user-select: none;
+}
+
+/* คำอธิบายเฉลย */
+.explanation {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: #2563eb;
+  font-style: italic;
+}
+
+/* ประวัติ */
+.history-list {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 15px;
+  color: #334155;
+}
+
+.history-item {
+  background-color: #eff6ff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgb(37 99 235 / 0.2);
+  user-select: none;
+}
+
+/* ปุ่มล้างประวัติ */
+.clear-btn {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+/* ปรับ layout ปุ่มในหน้าสร้างโจทย์ */
+.btn-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-group button, .btn-group .back-btn {
+  flex: 1 1 45%;
+  max-width: 260px;
+  text-align: center;
+}
+
+/* Responsive สำหรับมือถือ */
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+  .container {
+    padding: 20px 15px;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+  .btn-group button, .btn-group .back-btn {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+  .btn-group-center {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
