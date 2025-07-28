@@ -1,0 +1,480 @@
+โจทย์ของวิชาฟิสิก เคมีซ้ำ
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>สร้างโจทย์ | คณิต ฟิสิกส์ เคมี</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet" />
+  <style>
+    /* ฟอนต์และโทนสีหลัก */
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: #f0f7ff;
+      margin: 0;
+      padding: 20px;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      padding: 25px 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 5px 18px rgba(100, 149, 237, 0.3);
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+    header h2 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: #2c3e50;
+    }
+    /* ปุ่มย้อนกลับ */
+    .back-btn {
+      background-color: #64b5f6;
+      color: white;
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(100, 181, 246, 0.6);
+      transition: background-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+    .back-btn:hover {
+      background-color: #42a5f5;
+    }
+    /* ฟอร์มเลือกวิชา */
+    .form-section label {
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #34495e;
+    }
+    .form-section select,
+    .form-section button {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1.5px solid #a9c9ff;
+      font-size: 1rem;
+      font-family: 'Sarabun', sans-serif;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+      background: #f7fbff;
+      color: #2c3e50;
+      cursor: pointer;
+    }
+    .form-section select:hover,
+    .form-section select:focus,
+    .form-section button:hover {
+      border-color: #64b5f6;
+      outline: none;
+      background: #eaf3ff;
+    }
+    .form-section button {
+      margin-top: 20px;
+      background-color: #64b5f6;
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 6px 12px rgba(100, 181, 246, 0.5);
+      transition: background-color 0.3s ease;
+    }
+    .form-section button:active {
+      background-color: #3a85e7;
+    }
+    /* กล่องแสดงผล */
+    .output-box {
+      margin-top: 25px;
+      padding: 20px;
+      background: #f7faff;
+      border-radius: 12px;
+      box-shadow: inset 0 0 6px rgba(100, 149, 237, 0.15);
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    /* โจทย์แต่ละข้อ */
+    .question-box {
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #dbe9ff;
+    }
+    .question-box p {
+      margin: 0 0 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #34495e;
+    }
+    .question-box ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .question-box li {
+      margin-bottom: 8px;
+    }
+    .question-box label {
+      cursor: pointer;
+      user-select: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      display: inline-block;
+      width: 100%;
+      transition: background-color 0.25s ease;
+      border: 1.5px solid transparent;
+      font-size: 1rem;
+      color: #34495e;
+    }
+    /* เลือกคำตอบ */
+    .question-box input[type="radio"]:checked + label {
+      background-color: #d0e4ff;
+      border-color: #64b5f6;
+      font-weight: 700;
+      color: #1565c0;
+    }
+    /* ปุ่มตรวจคำตอบ */
+    #checkBtn {
+      margin-top: 20px;
+      background-color: #64b5f6;
+      color: white;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(100, 181, 246, 0.6);
+      transition: background-color 0.3s ease;
+      display: none;
+      width: 100%;
+    }
+    #checkBtn:hover {
+      background-color: #42a5f5;
+    }
+    /* ข้อความคะแนนและคำอธิบาย */
+    .correct {
+      color: green;
+      font-weight: 700;
+    }
+    .wrong {
+      color: red;
+      font-weight: 700;
+    }
+    .explanation {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: #34495e;
+      line-height: 1.3;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      .container {
+        padding: 20px 15px 30px;
+      }
+      header h2 {
+        font-size: 1.3rem;
+      }
+      .form-section select,
+      .form-section button,
+      #checkBtn {
+        font-size: 1rem;
+        padding: 10px 12px;
+      }
+      .question-box p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <button class="back-btn" onclick="goToHome()" title="กลับหน้าแรก">
+        ← กลับหน้าแรก
+      </button>
+      <h2>สร้างโจทย์จาก AI</h2>
+    </header>
+
+    <div class="form-section">
+      <label for="subject">เลือกวิชา:</label>
+      <select id="subject" onchange="updateTopics()">
+        <option value="math">คณิตศาสตร์</option>
+        <option value="physics">ฟิสิกส์</option>
+        <option value="chemistry">เคมี</option>
+      </select>
+
+      <label for="topic">หัวข้อ:</label>
+      <select id="topic">
+        <!-- ตัวเลือกหัวข้อจะเติมอัตโนมัติ -->
+      </select>
+
+      <label for="amount">จำนวนข้อ:</label>
+      <select id="amount">
+        <option value="5">5 ข้อ</option>
+        <option value="10" selected>10 ข้อ</option>
+        <option value="15">15 ข้อ</option>
+      </select>
+
+      <label for="difficulty">ระดับความยาก:</label>
+      <select id="difficulty">
+        <option value="ง่าย">ง่าย</option>
+        <option value="ปานกลาง" selected>ปานกลาง</option>
+        <option value="ยาก">ยาก</option>
+      </select>
+
+      <button class="btn" onclick="handleGenerate()">สร้างโจทย์</button>
+    </div>
+
+    <div id="quiz-output" class="output-box"></div>
+    <button id="checkBtn" onclick="checkAnswers()">ตรวจคำตอบ</button>
+    <div id="score" class="output-box"></div>
+  </div>
+
+  <script>
+    // ข้อมูลหัวข้อแยกตามวิชา
+    const topicsBySubject = {
+      math: ['สมการ'],
+      physics: ['คลื่น'],
+      chemistry: ['สมการเคมี']
+    };
+
+    // ตัวแปรเก็บโจทย์
+    let quizData = [];
+
+    // อัพเดตหัวข้อเมื่อเปลี่ยนวิชา
+    function updateTopics() {
+      const subject = document.getElementById('subject').value;
+      const topicSelect = document.getElementById('topic');
+      topicSelect.innerHTML = '';
+      topicsBySubject[subject].forEach(topic => {
+        const opt = document.createElement('option');
+        opt.value = topic;
+        opt.textContent = topic;
+        topicSelect.appendChild(opt);
+      });
+    }
+
+    // เรียกตอนโหลดเพื่ออัพเดตหัวข้อเริ่มต้น
+    updateTopics();
+
+    // ตัวอย่างโจทย์ (mock data)
+    // ในจริงอาจเรียก API หรือ AI เพื่อสร้างโจทย์ใหม่
+    const exampleQuestions = {
+      math: [
+        {
+          question: 'สมการ x + 3 = 7 จงหา x',
+          options: ['3', '4', '7', '10'],
+          answer: '4',
+          explanation: 'เมื่อ x + 3 = 7 ดังนั้น x = 7 - 3 = 4'
+        },
+        {
+          question: 'สมการ 2x - 5 = 9 จงหา x',
+          options: ['2', '7', '3', '5'],
+          answer: '7',
+          explanation: '2x - 5 = 9 ⇒ 2x = 14 ⇒ x = 7'
+        }
+      ],
+      physics: [
+        {
+          question: 'คลื่นยาว 4 เมตร เคลื่อนที่ด้วยความเร็ว 8 เมตร/วินาที จงหา ความถี่',
+          options: ['0.5 Hz', '2 Hz', '12 Hz', '32 Hz'],
+          answer: '2 Hz',
+          explanation: 'f = v / λ = 8 / 4 = 2 Hz'
+        }
+      ],
+      chemistry: [
+        {
+          question: 'สมการเคมี H2 + O2 → H2O ต้องเติมสัมประสิทธิ์เท่าไรให้สมดุล',
+          options: ['2,1,2', '1,1,1', '2,2,2', '1,2,1'],
+          answer: '2,1,2',
+          explanation: '2H₂ + O₂ → 2H₂O'
+        }
+      ]
+    };
+
+    // ฟังก์ชันสุ่มคำถามจากหัวข้อ (ใช้ exampleQuestions ในนี้)
+    function generateQuestions(subject, topic, amount, difficulty) {
+      // สำหรับตัวอย่างนี้จะสุ่มจาก exampleQuestions ที่มี
+      let pool = exampleQuestions[subject] || [];
+      if (pool.length === 0) return [];
+      // ถ้าจำนวนต้องการเกิน pool ให้วนซ้ำสุ่ม
+      const questions = [];
+      for (let i = 0; i < amount; i++) {
+        // สุ่มคำถาม
+        const q = pool[i % pool.length];
+        // สร้างอ็อบเจกต์ใหม่ เพื่อไม่ให้ซ้ำ
+        questions.push({
+          question: q.question,
+          options: q.options,
+          answer: q.answer,
+          explanation: q.explanation
+        });
+      }
+      return questions;
+    }
+
+    // ฟังก์ชันแสดงโจทย์
+    function showQuestions(questions) {
+      const output = document.getElementById('quiz-output');
+      output.innerHTML = '';
+      questions.forEach((q, i) => {
+        const div = document.createElement('div');
+        div.classList.add('question-box');
+        let html = `<p>ข้อที่ ${i + 1}. ${q.question}</p><ul>`;
+        q.options.forEach((opt, idx) => {
+          const optionId = `q${i}o${idx}`;
+          html += `
+            <li>
+              <input type="radio" id="${optionId}" name="q${i}" value="${opt}" />
+              <label for="${optionId}">${opt}</label>
+            </li>`;
+        });
+        html += '</ul>';
+        div.innerHTML = html;
+        output.appendChild(div);
+      });
+      // แสดงปุ่มตรวจคำตอบ
+      document.getElementById('checkBtn').style.display = 'block';
+      // ล้างคะแนนและประวัติเดิม
+      document.getElementById('score').innerHTML = '';
+    }
+
+    // ฟังก์ชันสร้างโจทย์
+    function handleGenerate() {
+      const subject = document.getElementById('subject').value;
+      const topic = document.getElementById('topic').value;
+      const amount = parseInt(document.getElementById('amount').value, 10);
+      const difficulty = document.getElementById('difficulty').value;
+
+      quizData = generateQuestions(subject, topic, amount, difficulty);
+      if (quizData.length === 0) {
+        alert('ยังไม่มีโจทย์สำหรับหัวข้อนี้');
+        return;
+      }
+      showQuestions(quizData);
+    }
+
+    // ประวัติการทำโจทย์ใน localStorage
+    const HISTORY_KEY = 'quizHistory';
+
+    function saveHistory(record) {
+      let history = JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+      history.push(record);
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    }
+
+    function displayHistory() {
+      const scoreBox = document.getElementById('score');
+      const history = JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+      if (history.length === 0) return;
+      const historyDiv = document.createElement('div');
+      historyDiv.style.marginTop = '20px';
+      historyDiv.innerHTML = `<h3>ประวัติการทำโจทย์ล่าสุด</h3>`;
+      history.slice(-5).reverse().forEach(record => {
+        const date = new Date(record.timestamp);
+        const dateStr = date.toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'short' });
+        const div = document.createElement('div');
+        div.style.borderTop = '1px solid #ccc';
+        div.style.padding = '6px 0';
+        div.innerHTML = `
+          <strong>${dateStr}</strong> — วิชา: ${record.subject}, หัวข้อ: ${record.topic}, จำนวนข้อ: ${record.amount}<br>
+          คะแนน: ${record.correct} / ${record.total}
+        `;
+        historyDiv.appendChild(div);
+      });
+      scoreBox.appendChild(historyDiv);
+    }
+
+    // ตรวจคำตอบและแสดงผล
+    function checkAnswers() {
+      let correctCount = 0;
+      const scoreBox = document.getElementById('score');
+      scoreBox.innerHTML = '';
+      let allAnswered = true;
+      quizData.forEach((q, i) => {
+        const radios = document.getElementsByName(`q${i}`);
+        let userAnswer = null;
+        for (const r of radios) {
+          if (r.checked) {
+            userAnswer = r.value;
+            break;
+          }
+        }
+        if (!userAnswer) {
+          allAnswered = false;
+          const msg = document.createElement('p');
+          msg.textContent = `ข้อที่ ${i + 1} ยังไม่ได้เลือกคำตอบ`;
+          msg.style.color = 'orange';
+          scoreBox.appendChild(msg);
+          return;
+        }
+        if (userAnswer === q.answer) {
+          correctCount++;
+          const p = document.createElement('p');
+          p.innerHTML = `ข้อที่ ${i + 1} <span class="correct">ถูกต้อง</span> ✅<br><span class="explanation">${q.explanation}</span>`;
+          scoreBox.appendChild(p);
+        } else {
+          const p = document.createElement('p');
+          p.innerHTML = `ข้อที่ ${i + 1} <span class="wrong">ผิด</span> ❌ (คำตอบที่ถูกต้อง: ${q.answer})<br><span class="explanation">${q.explanation}</span>`;
+          scoreBox.appendChild(p);
+        }
+      });
+      if (!allAnswered) {
+        return;
+      }
+      const total = quizData.length;
+      const resultSummary = document.createElement('h3');
+      resultSummary.textContent = `คุณตอบถูก ${correctCount} จาก ${total} ข้อ`;
+      scoreBox.insertBefore(resultSummary, scoreBox.firstChild);
+
+      // บันทึกประวัติ
+      const subject = document.getElementById('subject').value;
+      const topic = document.getElementById('topic').value;
+      const amount = total;
+      saveHistory({
+        timestamp: Date.now(),
+        subject,
+        topic,
+        amount,
+        correct: correctCount,
+        total
+      });
+
+      // แสดงประวัติ
+      displayHistory();
+      scoreBox.scrollIntoView({behavior: 'smooth'});
+    }
+
+    // ฟังก์ชันปุ่มกลับหน้าแรก (แก้เป็น URL หน้าแรกของคุณ)
+    function goToHome() {
+      // ตัวอย่าง: กลับไปหน้า index.html
+      window.location.href = 'index.html';
+    }
+
+    // แสดงประวัติตอนโหลดหน้า
+    displayHistory();
+  </script>
+</body>
+</html>
